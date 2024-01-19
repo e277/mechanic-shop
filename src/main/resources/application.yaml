@@ -15,14 +15,17 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          # issuer-uri: https://idp.example.com/issuer
-          # issuer-uri: http://localhost:8080
-          # jwk-set-uri: http://localhost:8080/.well-known.jwks.json
-          issuer-uri: https://idp.example.com
-          jwk-set-uri: https://idp.example.com/.well-known/jwks.json
+          issuer-uri: https://localhost:8080/token
+          jwk-set-uri: http://localhost:8080/token
+
+rsa:
+  private-key: classpath:certs/private.pem
+  public-key: classpath:certs/public.pem
 
 logging:
   level:
     org:
       hibernate:
         SQL: debug
+  file:
+    name: mechanic_shop.log
