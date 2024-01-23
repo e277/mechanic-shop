@@ -2,6 +2,7 @@ package dev.ungu.mechanicshop.service.impl;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 import java.util.function.Function;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,14 @@ public class JWTServiceImpl implements JWTService {
         return Jwts.builder().setSubject(userDetails.getUsername())
             .setIssuedAt(new Date(System.currentTimeMillis()))
             .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+            .signWith(getSigninKey(), SignatureAlgorithm.HS256)
+            .compact();
+    }
+
+    public String generateRefreshToken(Map<String, Object> extractClaims, UserDetails userDetails) {
+        return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24 * 7))
             .signWith(getSigninKey(), SignatureAlgorithm.HS256)
             .compact();
     }

@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import dev.ungu.mechanicshop.dto.JwtAuthenticationResponse;
 import dev.ungu.mechanicshop.dto.SignUpRequest;
+import dev.ungu.mechanicshop.dto.SignInRequest;
 import dev.ungu.mechanicshop.model.User;
 import dev.ungu.mechanicshop.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -20,5 +22,10 @@ public class AuthenticationController {
     @PostMapping("/signup")
     public ResponseEntity<User> signUp(@RequestBody SignUpRequest signUpRequest) {
         return ResponseEntity.ok(authenticationService.signUp(signUpRequest));
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<JwtAuthenticationResponse> signIn(@RequestBody SignInRequest signInRequest) {
+        return ResponseEntity.ok(authenticationService.signIn(signInRequest));
     }
 }
