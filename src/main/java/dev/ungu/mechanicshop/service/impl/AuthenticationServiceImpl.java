@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import dev.ungu.mechanicshop.dto.JwtAuthenticationResponse;
+import dev.ungu.mechanicshop.dto.RefreshTokenRequest;
 import dev.ungu.mechanicshop.dto.SignInRequest;
 import dev.ungu.mechanicshop.dto.SignUpRequest;
 import dev.ungu.mechanicshop.model.Role;
@@ -50,4 +51,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         return jwtAuthenticationResponse;
     }
+
+    public JwtAuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
+        String username = jwtService.extractUserName(refreshTokenRequest.getToken());
+        User user = userRepository.findByUsername(username).orElseThrow();
+
+        if (jwtService.isTokenValid(refreshTokenRequest.getToken(), user)) {
+            var jwt = jwtService.generateToken(user);
+
+            JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse();
+            jwtAuthenticationResponse.setToken(jwt);
+            jwtAuthenticationResponse.setRefreshToken(refreshTokenRequest.getToken());
+
+            return jwtAuthenticationResponse;
+        }
+        return null;
+    }
+
 }

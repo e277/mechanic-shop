@@ -18,7 +18,6 @@ spring:
   #         issuer-uri: https://localhost:8080/token
   #         jwk-set-uri: http://localhost:8080/token
 
-
 logging:
   level:
     org:

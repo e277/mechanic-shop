@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.ungu.mechanicshop.dto.JwtAuthenticationResponse;
+import dev.ungu.mechanicshop.dto.RefreshTokenRequest;
 import dev.ungu.mechanicshop.dto.SignUpRequest;
 import dev.ungu.mechanicshop.dto.SignInRequest;
 import dev.ungu.mechanicshop.model.User;
@@ -28,4 +29,10 @@ public class AuthenticationController {
     public ResponseEntity<JwtAuthenticationResponse> signIn(@RequestBody SignInRequest signInRequest) {
         return ResponseEntity.ok(authenticationService.signIn(signInRequest));
     }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<JwtAuthenticationResponse> refreshToken(@RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return ResponseEntity.ok(authenticationService.refreshToken(refreshTokenRequest));
+    }
+    
 }

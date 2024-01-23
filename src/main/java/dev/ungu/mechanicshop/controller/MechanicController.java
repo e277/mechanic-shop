@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import dev.ungu.mechanicshop.model.Mechanic;
 import dev.ungu.mechanicshop.service.MechanicService;
 
 @RestController
+@CrossOrigin(origins = "*/*")
 @RequestMapping("/api/v1/mechanic")
 public class MechanicController {
     

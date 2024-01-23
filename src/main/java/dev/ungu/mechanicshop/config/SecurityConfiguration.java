@@ -34,8 +34,7 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/api/v1/customer/**").hasAnyAuthority(Role.ADMIN.name())
                 .requestMatchers("/api/v1/vehicle/**").hasAnyAuthority(Role.ADMIN.name())
-                .requestMatchers("/api/v1/mechanic/**").hasAnyAuthority(Role.ADMIN.name())
-                .requestMatchers("/api/v1/mechanic/**").hasAnyAuthority(Role.USER.name())
+                .requestMatchers("/api/v1/mechanic/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
                 .anyRequest().authenticated())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider()).addFilterBefore(
