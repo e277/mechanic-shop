@@ -24,17 +24,15 @@ public class User implements UserDetails {
     private String password;
     private String email;
     private Role role;
-    private String token;
 
     public User() {}
 
-    public User(Long id, String username, String password, String email, String role, String token) {
+    public User(Long id, String username, String password, String email, String role) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.role = Role.valueOf(role);
-        this.token = token;
     }
 
 
@@ -50,11 +48,8 @@ public class User implements UserDetails {
     public String getEmail() { return this.email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getRole() { return this.role.toString(); }
-    public void setRole(String role) { this.role = Role.valueOf(role); }
-
-    public String getToken() { return this.token; }
-    public void setToken(String token) { this.token = token; }
+    public String getRole() { return this.role.name(); }
+    public void setRole(Role role) { this.role = role; }
 
 
     @Override
