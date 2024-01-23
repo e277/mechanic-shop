@@ -11,21 +11,18 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://localhost:8080/token
-          jwk-set-uri: http://localhost:8080/token
+  # security:
+  #   oauth2:
+  #     resourceserver:
+  #       jwt:
+  #         issuer-uri: https://localhost:8080/token
+  #         jwk-set-uri: http://localhost:8080/token
 
-rsa:
-  private-key: classpath:certs/private.pem
-  public-key: classpath:certs/public.pem
 
 logging:
   level:
     org:
       hibernate:
         SQL: debug
-  file:
-    name: mechanic_shop.log
+  # file:
+  #   name: mechanic_shop.log
