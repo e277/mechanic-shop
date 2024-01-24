@@ -11,6 +11,7 @@ import dev.ungu.mechanicshop.dto.JwtAuthenticationResponse;
 import dev.ungu.mechanicshop.dto.RefreshTokenRequest;
 import dev.ungu.mechanicshop.dto.SignInRequest;
 import dev.ungu.mechanicshop.dto.SignUpRequest;
+import dev.ungu.mechanicshop.dto.UserResponseDTO;
 import dev.ungu.mechanicshop.model.Role;
 import dev.ungu.mechanicshop.model.User;
 import dev.ungu.mechanicshop.repository.UserRepository;
@@ -26,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
     
-    public User signUp(SignUpRequest signUpRequest) {
+    public UserResponseDTO signUp(SignUpRequest signUpRequest) {
         
         User user = new User();
         
@@ -35,8 +36,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setEmail(signUpRequest.getEmail());
         user.setRole(Role.USER);
 
-        user.setPassword(null);
-        return userRepository.save(user);
+        userRepository.save(user);
+
+        UserResponseDTO userResponseDTO = new UserResponseDTO();
+        userResponseDTO.setUsername(user.getUsername());
+        userResponseDTO.setEmail(user.getEmail());
+        userResponseDTO.setRole(user.getRole());
+
+        return userResponseDTO;
     }
 
     public JwtAuthenticationResponse signIn(SignInRequest signInRequest) {
