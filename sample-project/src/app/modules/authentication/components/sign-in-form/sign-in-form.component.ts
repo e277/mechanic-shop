@@ -21,11 +21,11 @@ export class SignInFormComponent {
     ) {
 
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
   }
-  
+
 
   togglePasswordVisibility() {
     this.passwordFieldType =
@@ -34,11 +34,13 @@ export class SignInFormComponent {
 
   onSubmit() {
     this.isSubmitted = true;
+    console.log(this.loginForm.value);
 
     if (this.loginForm.valid) {
       this.auth.loginUser(this.loginForm.value)
       .subscribe(
         res => {
+          console.log("Response:", res);
           if (res.success) {
             this.loginForm.reset();
             this.router.navigate(["/"]);
@@ -47,7 +49,7 @@ export class SignInFormComponent {
           }
         },
         err => {
-    
+          console.log(err);
         }
       );
     }

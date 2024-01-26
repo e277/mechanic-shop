@@ -16,7 +16,7 @@ import dev.ungu.mechanicshop.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin(origins = "*/*")
+@CrossOrigin(origins = "http://localhost:4200/**")
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {

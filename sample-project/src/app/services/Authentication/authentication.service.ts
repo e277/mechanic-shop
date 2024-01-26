@@ -15,6 +15,7 @@ export class AuthenticationService {
     return this.http.post<any>(this.apiURL + 'auth/signin', body);
   }
 
+
   signUpUser(body: object): Observable<any> {
     return this.http.post<any>(this.apiURL + 'auth/signup', body);
   }
