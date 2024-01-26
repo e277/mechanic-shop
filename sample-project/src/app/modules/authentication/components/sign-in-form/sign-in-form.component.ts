@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/Authentication/authentication.service';
 
 @Component({
@@ -11,14 +12,16 @@ export class SignInFormComponent {
 
   public loginForm: FormGroup;
   public passwordFieldType: string = 'password';
+  public isSubmitted: boolean = false;
 
   constructor(
     private fb: FormBuilder,
-    private auth: AuthenticationService
+    private auth: AuthenticationService,
+    private router: Router
     ) {
 
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
   }
@@ -30,9 +33,23 @@ export class SignInFormComponent {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
+    this.isSubmitted = true;
 
-      console.log('Form submitted successfully!', this.loginForm.value);
+    if (this.loginForm.valid) {
+      this.auth.loginUser(this.loginForm.value)
+      .subscribe(
+        res => {
+          if (res.success) {
+            this.loginForm.reset();
+            this.router.navigate(["/"]);
+          } else {
+            this.loginForm.setErrors({ invalidCredentials: true });
+          }
+        },
+        err => {
+    
+        }
+      );
     }
   }
 }
