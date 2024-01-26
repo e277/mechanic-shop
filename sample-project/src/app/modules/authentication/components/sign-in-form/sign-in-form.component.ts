@@ -40,7 +40,9 @@ export class SignInFormComponent {
       this.auth.loginUser(this.loginForm.value)
       .subscribe({
         next: (res) => {
-          if (res.success) {
+          console.log("[RESPONSE]: ", res);
+          if (res.token) {
+            localStorage.setItem('token', res.token);
             this.loginForm.reset();
             this.router.navigate(["/"]);
           } else {
@@ -48,6 +50,7 @@ export class SignInFormComponent {
           }
         },
         error: (err) => {
+          console.log("[ERROR]: ", err);
         }
       });
     }

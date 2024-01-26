@@ -23,5 +23,6 @@ logging:
     org:
       hibernate:
         SQL: debug
-  # file:
-  #   name: mechanic_shop.log
+  file:
+    name: mechanic_shop.log
+    clean-history-on-start: true

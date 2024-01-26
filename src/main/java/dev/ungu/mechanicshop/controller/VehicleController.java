@@ -19,7 +19,7 @@ import dev.ungu.mechanicshop.model.Vehicle;
 import dev.ungu.mechanicshop.service.VehicleService;
 
 @RestController
-@CrossOrigin(origins = "*/*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/vehicle")
 public class VehicleController {
     
