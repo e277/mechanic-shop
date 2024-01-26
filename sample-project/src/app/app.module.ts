@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthenticationService } from './services/Authentication/authentication.service';
 import { AuthenticationModule } from './modules/authentication/authentication.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,8 +13,9 @@ import { AuthenticationModule } from './modules/authentication/authentication.mo
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
-    AuthenticationModule
+    AuthenticationModule,
   ],
   providers: [
     AuthenticationService
