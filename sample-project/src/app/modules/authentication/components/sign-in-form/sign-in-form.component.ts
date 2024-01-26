@@ -37,8 +37,8 @@ export class SignInFormComponent {
 
     if (this.loginForm.valid) {
       this.auth.loginUser(this.loginForm.value)
-      .subscribe(
-        res => {
+      .subscribe({
+        next: (res) => {
           if (res.success) {
             this.loginForm.reset();
             this.router.navigate(["/"]);
@@ -46,10 +46,9 @@ export class SignInFormComponent {
             this.loginForm.setErrors({ invalidCredentials: true });
           }
         },
-        err => {
-    
+        error: (err) => {
         }
-      );
+      });
     }
   }
 }

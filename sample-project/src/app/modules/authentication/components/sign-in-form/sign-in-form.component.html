@@ -9,7 +9,7 @@
                 <div class="rounded overflow-hidden border border-[#a4abb5] focus-within:border-[#3a4855]  duration-300 ease-in-out">
                 <input type="text" formControlName="username" class="w-full h-10 rounded border-none focus:ring-0 text-[#111] text-sm outline-none px-2">
                 </div>
-                <div *ngIf="loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched" class="text-red-500 text-xs">Username is required</div>
+                <div *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched" class="text-red-500 text-xs">Username is required</div>
             </div>
             <div class="w-full flex flex-col gap-1">
                 <label for="" class="text-[#111] font-semibold text-sm">Password</label>
