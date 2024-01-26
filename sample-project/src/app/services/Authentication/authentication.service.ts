@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,16 +7,19 @@ import { Observable } from 'rxjs';
 })
 export class AuthenticationService {
 
-  private apiURL: string = "http://localhost:8080/api/v1/"
+  private apiURL = 'http://localhost:8080/api/v1/';
 
   constructor(private http: HttpClient) { }
 
   loginUser(body: object): Observable<any> {
-    return this.http.post<any>(this.apiURL + 'auth/signin', body);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiURL}auth/signin`, body, { headers });
   }
 
 
   signUpUser(body: object): Observable<any> {
-    return this.http.post<any>(this.apiURL + 'auth/signup', body);
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this.http.post<any>(`${this.apiURL}auth/signup`, body, { headers });
   }
+
 }
