@@ -3,6 +3,8 @@ package dev.ungu.mechanicshop.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import dev.ungu.mechanicshop.model.Vehicle;
 import dev.ungu.mechanicshop.service.VehicleService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/vehicle")
 public class VehicleController {
     
@@ -28,26 +31,26 @@ public class VehicleController {
 
     @GetMapping("/")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<Vehicle> getAllVehicles() {
-        return this.vehicleService.getAllVehicles();
+    public ResponseEntity<List<Vehicle>> getAllVehicles() {
+        return ResponseEntity.ok(vehicleService.getAllVehicles());
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Vehicle getVehicleById(@PathVariable Long id) {
-        return this.vehicleService.getVehicleById(id);
+    public ResponseEntity<Vehicle> getVehicleById(@PathVariable Long id) {
+        return ResponseEntity.ok(vehicleService.getVehicleById(id));
     }
 
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Vehicle createVehicle(@RequestBody Vehicle vehicle) {
-        return this.vehicleService.createVehicle(vehicle);
+    public ResponseEntity<Vehicle> createVehicle(@RequestBody Vehicle vehicle) {
+        return ResponseEntity.ok(vehicleService.createVehicle(vehicle));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Vehicle updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
-        return this.vehicleService.updateVehicle(id, vehicle);
+    public ResponseEntity<Vehicle> updateVehicle(@PathVariable Long id, @RequestBody Vehicle vehicle) {
+        return ResponseEntity.ok(vehicleService.updateVehicle(id, vehicle));
     }
 
     @DeleteMapping("/{id}")

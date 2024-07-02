@@ -1,0 +1,29 @@
+<div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div *ngIf="isSubmitted && loginForm.hasError('invalidCredentials')" class="border-l-2 border-red-800 p-3 w-full bg-red-50  text-xs">
+            <div class="text-red-800">Incorrect username or password</div>
+        </div>
+        <div class="mt-4 flex flex-col gap-6">
+            <div class="w-full flex flex-col gap-1">
+                <label for="" class="text-[#111] font-semibold text-sm">Username</label>
+                <div class="rounded overflow-hidden border border-[#a4abb5] focus-within:border-[#3a4855]  duration-300 ease-in-out">
+                <input type="text" formControlName="username" class="w-full h-10 rounded border-none focus:ring-0 text-[#111] text-sm outline-none px-2">
+                </div>
+                <div *ngIf="loginForm.get('username')?.hasError('required') && loginForm.get('username')?.touched" class="text-red-500 text-xs">Username is required</div>
+            </div>
+            <div class="w-full flex flex-col gap-1">
+                <label for="" class="text-[#111] font-semibold text-sm">Password</label>
+                <div class="flex items-center rounded overflow-hidden border border-[#a4abb5] h-10 focus-within:border-[#3a4855]  duration-300 ease-in-out">
+                    <input type="{{ passwordFieldType }}" formControlName="password" class="h-10 flex-1 border-none focus:ring-0 text-[#111] pr-0 text-sm  outline-none px-2">
+                    <button (mousedown)="togglePasswordVisibility()" (mouseup)="togglePasswordVisibility()" class="w-10 h-10 flex items-center justify-center text-[#a4abb5] hover:text-[#111] outline-none duration-300 ease-in-out text-sm">
+                        <i class="fas" [ngClass]=" passwordFieldType === 'password' ? 'fa-eye-slash' : 'fa-eye'"></i>
+                    </button>
+                </div>
+                <div *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched" class="text-red-500 text-xs">Password is required</div>
+            </div>
+        </div>
+        <div class="mt-12 flex items-center justify-between">
+            <button type="submit" class="rounded w-full h-[40px] flex justify-center items-center font-medium duration-300 ease-in-out text-[#f2f2f2] bg-[#325647] hover:bg-[#49695b] ">Sign In</button>
+        </div>
+    </form>
+</div>

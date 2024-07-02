@@ -3,6 +3,8 @@ package dev.ungu.mechanicshop.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +19,7 @@ import dev.ungu.mechanicshop.model.Mechanic;
 import dev.ungu.mechanicshop.service.MechanicService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/mechanic")
 public class MechanicController {
     
@@ -28,26 +31,26 @@ public class MechanicController {
 
     @GetMapping("/")
     @ResponseStatus(code = HttpStatus.OK)
-    public List<Mechanic> getAllmechanics() {
-        return this.mechanicService.getAllMechanics();
+    public ResponseEntity<List<Mechanic>> getAllmechanics() {
+        return ResponseEntity.ok(mechanicService.getAllMechanics());
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Mechanic getMechanicById(@PathVariable Long id) {
-        return this.mechanicService.getMechanicById(id);
+    public ResponseEntity<Mechanic> getMechanicById(@PathVariable Long id) {
+        return ResponseEntity.ok(mechanicService.getMechanicById(id));
     }
 
     @PostMapping("/")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Mechanic createMechanic(@RequestBody Mechanic mechanic) {
-        return this.mechanicService.createMechanic(mechanic);
+    public ResponseEntity<Mechanic> createMechanic(@RequestBody Mechanic mechanic) {
+        return ResponseEntity.ok(mechanicService.createMechanic(mechanic));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Mechanic updateMechanic(@PathVariable Long id, @RequestBody Mechanic mechanic) {
-        return this.mechanicService.updateMechanic(id, mechanic);
+    public ResponseEntity<Mechanic> updateMechanic(@PathVariable Long id, @RequestBody Mechanic mechanic) {
+        return ResponseEntity.ok(mechanicService.updateMechanic(id, mechanic));
     }
 
     @DeleteMapping("/{id}")
